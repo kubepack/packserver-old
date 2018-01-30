@@ -8,7 +8,23 @@ kind: Policy
 omitStages:
   - "RequestReceived"
 rules:
-  - level: Metadata
-    resources:
-    - group: ""
-      resources: ["pods/log", "pods/status"]
+- level: Metadata
+  # users: ["system:serviceaccount:<namespace>:<serviceaccount-name>"]
+  resources:
+  - group: "" # core
+  - group: "admissionregistration.k8s.io"
+  - group: "apiextensions.k8s.io"
+  - group: "apiregistration.k8s.io"
+  - group: "apps"
+  - group: "authentication.k8s.io"
+  - group: "authorization.k8s.io"
+  - group: "autoscaling"
+  - group: "batch"
+  - group: "certificates.k8s.io"
+  - group: "extensions"
+  - group: "metrics.k8s.io"
+  - group: "networking.k8s.io"
+  - group: "policy"
+  - group: "rbac.authorization.k8s.io"
+  - group: "settings.k8s.io"
+  - group: "storage.k8s.io"

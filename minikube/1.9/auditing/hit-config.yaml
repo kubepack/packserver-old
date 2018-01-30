@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Config
 clusters:
 - cluster:
-    server: http://192.168.1.104:8080/xyz12345
+    server: http://192.168.1.104:8080/events
   name: hit-config
 contexts:
 - context:
