@@ -11,6 +11,12 @@
   revision = "99dbf420807d9459b63d1d0bf702537bb7aa976f"
 
 [[projects]]
+  name = "github.com/ghodss/yaml"
+  packages = ["."]
+  revision = "0ca9ea5df5451ffdf184b4428c902747c2c11cd7"
+  version = "v1.0.0"
+
+[[projects]]
   name = "github.com/gogo/protobuf"
   packages = [
     "proto",
@@ -42,6 +48,12 @@
   packages = ["."]
   revision = "064e2069ce9c359c118179501254f67d7d37ba24"
   version = "0.2"
+
+[[projects]]
+  name = "github.com/json-iterator/go"
+  packages = ["."]
+  revision = "28452fcdec4e44348d2af0d91d1e9e38da3a9e0a"
+  version = "1.0.5"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -107,26 +119,75 @@
   version = "v0.9.0"
 
 [[projects]]
+  branch = "v2"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "d670f9405373e636a5a2765eea47fac0c9bc91a4"
+
+[[projects]]
   branch = "master"
   name = "k8s.io/api"
-  packages = ["authentication/v1"]
+  packages = [
+    "admission/v1beta1",
+    "admissionregistration/v1alpha1",
+    "admissionregistration/v1beta1",
+    "apps/v1",
+    "apps/v1beta1",
+    "apps/v1beta2",
+    "authentication/v1",
+    "authentication/v1beta1",
+    "authorization/v1",
+    "authorization/v1beta1",
+    "autoscaling/v1",
+    "autoscaling/v2beta1",
+    "batch/v1",
+    "batch/v1beta1",
+    "batch/v2alpha1",
+    "certificates/v1beta1",
+    "core/v1",
+    "events/v1beta1",
+    "extensions/v1beta1",
+    "imagepolicy/v1alpha1",
+    "networking/v1",
+    "policy/v1beta1",
+    "rbac/v1",
+    "rbac/v1alpha1",
+    "rbac/v1beta1",
+    "scheduling/v1alpha1",
+    "settings/v1alpha1",
+    "storage/v1",
+    "storage/v1alpha1",
+    "storage/v1beta1"
+  ]
   revision = "dc0dd48d5a5cae9f8736bb0643cfe6052e450f1b"
 
 [[projects]]
   branch = "master"
   name = "k8s.io/apimachinery"
   packages = [
+    "pkg/api/meta",
     "pkg/api/resource",
+    "pkg/apimachinery",
+    "pkg/apimachinery/announced",
+    "pkg/apimachinery/registered",
     "pkg/apis/meta/v1",
+    "pkg/apis/meta/v1/unstructured",
+    "pkg/apis/meta/v1alpha1",
     "pkg/conversion",
     "pkg/conversion/queryparams",
     "pkg/fields",
     "pkg/labels",
     "pkg/runtime",
     "pkg/runtime/schema",
+    "pkg/runtime/serializer",
+    "pkg/runtime/serializer/json",
+    "pkg/runtime/serializer/protobuf",
+    "pkg/runtime/serializer/recognizer",
+    "pkg/runtime/serializer/versioning",
     "pkg/selection",
     "pkg/types",
     "pkg/util/errors",
+    "pkg/util/framer",
     "pkg/util/intstr",
     "pkg/util/json",
     "pkg/util/net",
@@ -135,6 +196,7 @@
     "pkg/util/validation",
     "pkg/util/validation/field",
     "pkg/util/wait",
+    "pkg/util/yaml",
     "pkg/watch",
     "third_party/forked/golang/reflect"
   ]
@@ -149,9 +211,21 @@
   ]
   revision = "f5be0e0c93c8186b32ea3960fdc70ec265186fae"
 
+[[projects]]
+  name = "k8s.io/client-go"
+  packages = ["kubernetes/scheme"]
+  revision = "78700dec6369ba22221b72770783300f143df150"
+  version = "v6.0.0"
+
+[[projects]]
+  name = "k8s.io/kubernetes"
+  packages = ["pkg/kubectl/scheme"]
+  revision = "5fa2db2bd46ac79e5e00a4e6ed24191080aa463b"
+  version = "v1.9.2"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a5706302bc7ff5fbcf9eb1da4776e96460b4c644afb660cfe3496e1ae0905b84"
+  inputs-digest = "d808cd71e9559683457868228da680662851d9cd2ad8b7abe295288b0be14a0e"
   solver-name = "gps-cdcl"
   solver-version = 1

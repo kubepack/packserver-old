@@ -15,4 +15,3 @@ minikube start \
 --mount --mount-string="$HOME/.minikube/files:/tmp/files" \
 --feature-gates=AdvancedAuditing=true \
 --extra-config=apiserver.audit-log-path=/tmp/files/audit.log
-# --extra-config=apiserver.audit-webhook-config-file=/tmp/files/hit-config.yaml
