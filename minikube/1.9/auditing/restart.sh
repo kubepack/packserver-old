@@ -4,9 +4,9 @@ set -xeou pipefail
 
 mkdir -p ~/.minikube/files
 # curl -fsSL https://raw.githubusercontent.com/tamalsaha/tasty-kube/master/minikube/1.9/auditing/kube-apiserver.yaml > ~/.minikube/files/kube-apiserver.yaml
-cp ~/go/src/github.com/kubepack/log-audit/minikube/1.9/auditing/kube-apiserver.yaml ~/.minikube/files/kube-apiserver.yaml
-cp ~/go/src/github.com/kubepack/log-audit/minikube/1.9/auditing/audit-policy.yaml ~/.minikube/files/audit-policy.yaml
-cp ~/go/src/github.com/kubepack/log-audit/minikube/1.9/auditing/hit-config.yaml ~/.minikube/files/hit-config.yaml
+cp ~/go/src/github.com/kubepack/apiserver/minikube/1.9/auditing/kube-apiserver.yaml ~/.minikube/files/kube-apiserver.yaml
+cp ~/go/src/github.com/kubepack/apiserver/minikube/1.9/auditing/audit-policy.yaml ~/.minikube/files/audit-policy.yaml
+cp ~/go/src/github.com/kubepack/apiserver/minikube/1.9/auditing/hit-config.yaml ~/.minikube/files/hit-config.yaml
 
 minikube delete || true
 minikube start \
