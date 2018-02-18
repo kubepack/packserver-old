@@ -20,29 +20,56 @@ import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// PackList is a list of Pack objects.
-type PackList struct {
+// ManifestList is a list of Manifest objects.
+type ManifestList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
-	Items []Pack `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items []Manifest `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-type PackSpec struct {
+type ManifestSpec struct {
 }
 
-type PackStatus struct {
+type ManifestStatus struct {
 }
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type Pack struct {
+type Release struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
-	Spec   PackSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
-	Status PackStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+	Spec   ReleaseSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status ReleaseStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// ReleaseList is a list of Release objects.
+type ReleaseList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	Items []Release `json:"items" protobuf:"bytes,2,rep,name=items"`
+}
+
+type ReleaseSpec struct {
+}
+
+type ReleaseStatus struct {
+}
+
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type Manifest struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	Spec   ManifestSpec   `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Status ManifestStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // +genclient
@@ -53,7 +80,7 @@ type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
-	// DisallowedPacks holds a list of Pack.Names that are disallowed.
+	// DisallowedPacks holds a list of Manifest.Names that are disallowed.
 	DisallowedPacks []string `json:"disallowedPacks,omitempty" protobuf:"bytes,2,rep,name=disallowedPacks"`
 }
 

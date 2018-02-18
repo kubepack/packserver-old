@@ -25,8 +25,12 @@ type FakeAppsV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeAppsV1alpha1) Packs(namespace string) v1alpha1.PackInterface {
-	return &FakePacks{c, namespace}
+func (c *FakeAppsV1alpha1) Manifests(namespace string) v1alpha1.ManifestInterface {
+	return &FakeManifests{c, namespace}
+}
+
+func (c *FakeAppsV1alpha1) Releases(namespace string) v1alpha1.ReleaseInterface {
+	return &FakeReleases{c, namespace}
 }
 
 func (c *FakeAppsV1alpha1) Users() v1alpha1.UserInterface {

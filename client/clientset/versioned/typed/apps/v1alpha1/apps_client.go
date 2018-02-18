@@ -24,7 +24,8 @@ import (
 
 type AppsV1alpha1Interface interface {
 	RESTClient() rest.Interface
-	PacksGetter
+	ManifestsGetter
+	ReleasesGetter
 	UsersGetter
 }
 
@@ -33,8 +34,12 @@ type AppsV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *AppsV1alpha1Client) Packs(namespace string) PackInterface {
-	return newPacks(c, namespace)
+func (c *AppsV1alpha1Client) Manifests(namespace string) ManifestInterface {
+	return newManifests(c, namespace)
+}
+
+func (c *AppsV1alpha1Client) Releases(namespace string) ReleaseInterface {
+	return newReleases(c, namespace)
 }
 
 func (c *AppsV1alpha1Client) Users() UserInterface {

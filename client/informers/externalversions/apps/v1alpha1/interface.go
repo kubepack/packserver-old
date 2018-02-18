@@ -24,8 +24,10 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
-	// Packs returns a PackInformer.
-	Packs() PackInformer
+	// Manifests returns a ManifestInformer.
+	Manifests() ManifestInformer
+	// Releases returns a ReleaseInformer.
+	Releases() ReleaseInformer
 	// Users returns a UserInformer.
 	Users() UserInformer
 }
@@ -41,9 +43,14 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
 }
 
-// Packs returns a PackInformer.
-func (v *version) Packs() PackInformer {
-	return &packInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+// Manifests returns a ManifestInformer.
+func (v *version) Manifests() ManifestInformer {
+	return &manifestInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// Releases returns a ReleaseInformer.
+func (v *version) Releases() ReleaseInformer {
+	return &releaseInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // Users returns a UserInformer.

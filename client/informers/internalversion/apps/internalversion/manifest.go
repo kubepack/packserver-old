@@ -31,59 +31,59 @@ import (
 	cache "k8s.io/client-go/tools/cache"
 )
 
-// PackInformer provides access to a shared informer and lister for
-// Packs.
-type PackInformer interface {
+// ManifestInformer provides access to a shared informer and lister for
+// Manifests.
+type ManifestInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() internalversion.PackLister
+	Lister() internalversion.ManifestLister
 }
 
-type packInformer struct {
+type manifestInformer struct {
 	factory          internalinterfaces.SharedInformerFactory
 	tweakListOptions internalinterfaces.TweakListOptionsFunc
 	namespace        string
 }
 
-// NewPackInformer constructs a new informer for Pack type.
+// NewManifestInformer constructs a new informer for Manifest type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewPackInformer(client clientset_internalversion.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
-	return NewFilteredPackInformer(client, namespace, resyncPeriod, indexers, nil)
+func NewManifestInformer(client clientset_internalversion.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
+	return NewFilteredManifestInformer(client, namespace, resyncPeriod, indexers, nil)
 }
 
-// NewFilteredPackInformer constructs a new informer for Pack type.
+// NewFilteredManifestInformer constructs a new informer for Manifest type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewFilteredPackInformer(client clientset_internalversion.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+func NewFilteredManifestInformer(client clientset_internalversion.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options v1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.Apps().Packs(namespace).List(options)
+				return client.Apps().Manifests(namespace).List(options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.Apps().Packs(namespace).Watch(options)
+				return client.Apps().Manifests(namespace).Watch(options)
 			},
 		},
-		&apps.Pack{},
+		&apps.Manifest{},
 		resyncPeriod,
 		indexers,
 	)
 }
 
-func (f *packInformer) defaultInformer(client clientset_internalversion.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
-	return NewFilteredPackInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
+func (f *manifestInformer) defaultInformer(client clientset_internalversion.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
+	return NewFilteredManifestInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 
-func (f *packInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&apps.Pack{}, f.defaultInformer)
+func (f *manifestInformer) Informer() cache.SharedIndexInformer {
+	return f.factory.InformerFor(&apps.Manifest{}, f.defaultInformer)
 }
 
-func (f *packInformer) Lister() internalversion.PackLister {
-	return internalversion.NewPackLister(f.Informer().GetIndexer())
+func (f *manifestInformer) Lister() internalversion.ManifestLister {
+	return internalversion.NewManifestLister(f.Informer().GetIndexer())
 }

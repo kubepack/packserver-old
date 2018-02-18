@@ -18,13 +18,21 @@ limitations under the License.
 
 package v1alpha1
 
-// PackListerExpansion allows custom methods to be added to
-// PackLister.
-type PackListerExpansion interface{}
+// ManifestListerExpansion allows custom methods to be added to
+// ManifestLister.
+type ManifestListerExpansion interface{}
 
-// PackNamespaceListerExpansion allows custom methods to be added to
-// PackNamespaceLister.
-type PackNamespaceListerExpansion interface{}
+// ManifestNamespaceListerExpansion allows custom methods to be added to
+// ManifestNamespaceLister.
+type ManifestNamespaceListerExpansion interface{}
+
+// ReleaseListerExpansion allows custom methods to be added to
+// ReleaseLister.
+type ReleaseListerExpansion interface{}
+
+// ReleaseNamespaceListerExpansion allows custom methods to be added to
+// ReleaseNamespaceLister.
+type ReleaseNamespaceListerExpansion interface{}
 
 // UserListerExpansion allows custom methods to be added to
 // UserLister.

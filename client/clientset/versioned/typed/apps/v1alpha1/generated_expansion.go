@@ -15,6 +15,8 @@ limitations under the License.
 */
 package v1alpha1
 
-type PackExpansion interface{}
+type ManifestExpansion interface{}
+
+type ReleaseExpansion interface{}
 
 type UserExpansion interface{}

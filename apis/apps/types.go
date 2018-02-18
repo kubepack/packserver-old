@@ -20,29 +20,56 @@ import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// PackList is a list of Pack objects.
-type PackList struct {
+// ManifestList is a list of Manifest objects.
+type ManifestList struct {
 	metav1.TypeMeta
 	metav1.ListMeta
 
-	Items []Pack
+	Items []Manifest
 }
 
-type PackSpec struct {
+type ManifestSpec struct {
 }
 
-type PackStatus struct {
+type ManifestStatus struct {
 }
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-type Pack struct {
+type Manifest struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
 
-	Spec   PackSpec
-	Status PackStatus
+	Spec   ManifestSpec
+	Status ManifestStatus
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// ReleaseList is a list of Release objects.
+type ReleaseList struct {
+	metav1.TypeMeta
+	metav1.ListMeta
+
+	Items []Release
+}
+
+type ReleaseSpec struct {
+}
+
+type ReleaseStatus struct {
+}
+
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type Release struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+
+	Spec   ReleaseSpec
+	Status ReleaseStatus
 }
 
 // +genclient
@@ -53,7 +80,7 @@ type User struct {
 	metav1.TypeMeta
 	metav1.ObjectMeta
 
-	// DisallowedPacks holds a list of Pack.Names that are disallowed.
+	// DisallowedPacks holds a list of Manifest.Names that are disallowed.
 	DisallowedPacks []string
 }
 

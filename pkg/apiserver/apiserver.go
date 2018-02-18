@@ -5,7 +5,7 @@ import (
 	"github.com/kubepack/packserver/apis/apps/install"
 	"github.com/kubepack/packserver/apis/apps/v1alpha1"
 	appsregistry "github.com/kubepack/packserver/pkg/registry"
-	packstorage "github.com/kubepack/packserver/pkg/registry/apps/pack"
+	packstorage "github.com/kubepack/packserver/pkg/registry/apps/manifest"
 	userstorage "github.com/kubepack/packserver/pkg/registry/apps/user"
 	"k8s.io/apimachinery/pkg/apimachinery/announced"
 	"k8s.io/apimachinery/pkg/apimachinery/registered"

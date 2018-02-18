@@ -33,61 +33,61 @@ import (
 )
 
 // TestBanfluderAdmissionPlugin tests various test cases against
-// ban pack admission plugin
+// ban manifest admission plugin
 func TestBanflunderAdmissionPlugin(t *testing.T) {
 	var scenarios = []struct {
 		informersOutput        apps.UserList
-		admissionInput         apps.Pack
+		admissionInput         apps.Manifest
 		admissionInputKind     schema.GroupVersionKind
 		admissionInputResource schema.GroupVersionResource
 		admissionMustFail      bool
 	}{
 		// scenario 1:
-		// a pack with a name that appears on a list of disallowed flunders must be banned
+		// a manifest with a name that appears on a list of disallowed flunders must be banned
 		{
 			informersOutput: apps.UserList{
 				Items: []apps.User{
 					{DisallowedPacks: []string{"badname"}},
 				},
 			},
-			admissionInput: apps.Pack{
+			admissionInput: apps.Manifest{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "badname",
 					Namespace: "",
 				},
 			},
-			admissionInputKind:     apps.Kind("Pack").WithVersion("version"),
+			admissionInputKind:     apps.Kind("Manifest").WithVersion("version"),
 			admissionInputResource: apps.Resource("flunders").WithVersion("version"),
 			admissionMustFail:      true,
 		},
 		// scenario 2:
-		// a pack with a name that does not appear on a list of disallowed flunders must be admitted
+		// a manifest with a name that does not appear on a list of disallowed flunders must be admitted
 		{
 			informersOutput: apps.UserList{
 				Items: []apps.User{
 					{DisallowedPacks: []string{"badname"}},
 				},
 			},
-			admissionInput: apps.Pack{
+			admissionInput: apps.Manifest{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "goodname",
 					Namespace: "",
 				},
 			},
-			admissionInputKind:     apps.Kind("Pack").WithVersion("version"),
+			admissionInputKind:     apps.Kind("Manifest").WithVersion("version"),
 			admissionInputResource: apps.Resource("flunders").WithVersion("version"),
 			admissionMustFail:      false,
 		},
 		// scenario 3:
-		// a pack with a name that appears on a list of disallowed flunders would be banned
-		// but the kind passed in is not a pack thus the whole request is accepted
+		// a manifest with a name that appears on a list of disallowed flunders would be banned
+		// but the kind passed in is not a manifest thus the whole request is accepted
 		{
 			informersOutput: apps.UserList{
 				Items: []apps.User{
 					{DisallowedPacks: []string{"badname"}},
 				},
 			},
-			admissionInput: apps.Pack{
+			admissionInput: apps.Manifest{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "badname",
 					Namespace: "",

@@ -31,59 +31,59 @@ import (
 	cache "k8s.io/client-go/tools/cache"
 )
 
-// PackInformer provides access to a shared informer and lister for
-// Packs.
-type PackInformer interface {
+// ReleaseInformer provides access to a shared informer and lister for
+// Releases.
+type ReleaseInformer interface {
 	Informer() cache.SharedIndexInformer
-	Lister() v1alpha1.PackLister
+	Lister() v1alpha1.ReleaseLister
 }
 
-type packInformer struct {
+type releaseInformer struct {
 	factory          internalinterfaces.SharedInformerFactory
 	tweakListOptions internalinterfaces.TweakListOptionsFunc
 	namespace        string
 }
 
-// NewPackInformer constructs a new informer for Pack type.
+// NewReleaseInformer constructs a new informer for Release type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewPackInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
-	return NewFilteredPackInformer(client, namespace, resyncPeriod, indexers, nil)
+func NewReleaseInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers) cache.SharedIndexInformer {
+	return NewFilteredReleaseInformer(client, namespace, resyncPeriod, indexers, nil)
 }
 
-// NewFilteredPackInformer constructs a new informer for Pack type.
+// NewFilteredReleaseInformer constructs a new informer for Release type.
 // Always prefer using an informer factory to get a shared informer instead of getting an independent
 // one. This reduces memory footprint and number of connections to the server.
-func NewFilteredPackInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+func NewFilteredReleaseInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
 			ListFunc: func(options v1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AppsV1alpha1().Packs(namespace).List(options)
+				return client.AppsV1alpha1().Releases(namespace).List(options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AppsV1alpha1().Packs(namespace).Watch(options)
+				return client.AppsV1alpha1().Releases(namespace).Watch(options)
 			},
 		},
-		&apps_v1alpha1.Pack{},
+		&apps_v1alpha1.Release{},
 		resyncPeriod,
 		indexers,
 	)
 }
 
-func (f *packInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
-	return NewFilteredPackInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
+func (f *releaseInformer) defaultInformer(client versioned.Interface, resyncPeriod time.Duration) cache.SharedIndexInformer {
+	return NewFilteredReleaseInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 
-func (f *packInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&apps_v1alpha1.Pack{}, f.defaultInformer)
+func (f *releaseInformer) Informer() cache.SharedIndexInformer {
+	return f.factory.InformerFor(&apps_v1alpha1.Release{}, f.defaultInformer)
 }
 
-func (f *packInformer) Lister() v1alpha1.PackLister {
-	return v1alpha1.NewPackLister(f.Informer().GetIndexer())
+func (f *releaseInformer) Lister() v1alpha1.ReleaseLister {
+	return v1alpha1.NewReleaseLister(f.Informer().GetIndexer())
 }

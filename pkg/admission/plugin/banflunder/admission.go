@@ -44,12 +44,12 @@ type DisallowPack struct {
 
 var _ = wardleinitializer.WantsInternalWardleInformerFactory(&DisallowPack{})
 
-// Admit ensures that the object in-flight is of kind Pack.
+// Admit ensures that the object in-flight is of kind Manifest.
 // In addition checks that the Name is not on the banned list.
 // The list is stored in Users API objects.
 func (d *DisallowPack) Admit(a admission.Attributes) error {
 	// we are only interested in flunders
-	if a.GetKind().GroupKind() != apps.Kind("Pack") {
+	if a.GetKind().GroupKind() != apps.Kind("Manifest") {
 		return nil
 	}
 
@@ -92,7 +92,7 @@ func (d *DisallowPack) ValidateInitialization() error {
 	return nil
 }
 
-// New creates a new ban pack admission plugin
+// New creates a new ban manifest admission plugin
 func New() (*DisallowPack, error) {
 	return &DisallowPack{
 		Handler: admission.NewHandler(admission.Create),

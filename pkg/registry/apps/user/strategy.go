@@ -30,8 +30,8 @@ import (
 	"k8s.io/apiserver/pkg/storage/names"
 )
 
-func NewStrategy(typer runtime.ObjectTyper) fischerStrategy {
-	return fischerStrategy{typer, names.SimpleNameGenerator}
+func NewStrategy(typer runtime.ObjectTyper) userStrategy {
+	return userStrategy{typer, names.SimpleNameGenerator}
 }
 
 func GetAttrs(obj runtime.Object) (labels.Set, fields.Set, bool, error) {
@@ -57,36 +57,36 @@ func fischerToSelectableFields(obj *apps.User) fields.Set {
 	return generic.ObjectMetaFieldsSet(&obj.ObjectMeta, true)
 }
 
-type fischerStrategy struct {
+type userStrategy struct {
 	runtime.ObjectTyper
 	names.NameGenerator
 }
 
-func (fischerStrategy) NamespaceScoped() bool {
+func (userStrategy) NamespaceScoped() bool {
 	return false
 }
 
-func (fischerStrategy) PrepareForCreate(ctx genericapirequest.Context, obj runtime.Object) {
+func (userStrategy) PrepareForCreate(ctx genericapirequest.Context, obj runtime.Object) {
 }
 
-func (fischerStrategy) PrepareForUpdate(ctx genericapirequest.Context, obj, old runtime.Object) {
+func (userStrategy) PrepareForUpdate(ctx genericapirequest.Context, obj, old runtime.Object) {
 }
 
-func (fischerStrategy) Validate(ctx genericapirequest.Context, obj runtime.Object) field.ErrorList {
+func (userStrategy) Validate(ctx genericapirequest.Context, obj runtime.Object) field.ErrorList {
 	return field.ErrorList{}
 }
 
-func (fischerStrategy) AllowCreateOnUpdate() bool {
+func (userStrategy) AllowCreateOnUpdate() bool {
 	return false
 }
 
-func (fischerStrategy) AllowUnconditionalUpdate() bool {
+func (userStrategy) AllowUnconditionalUpdate() bool {
 	return false
 }
 
-func (fischerStrategy) Canonicalize(obj runtime.Object) {
+func (userStrategy) Canonicalize(obj runtime.Object) {
 }
 
-func (fischerStrategy) ValidateUpdate(ctx genericapirequest.Context, obj, old runtime.Object) field.ErrorList {
+func (userStrategy) ValidateUpdate(ctx genericapirequest.Context, obj, old runtime.Object) field.ErrorList {
 	return field.ErrorList{}
 }
