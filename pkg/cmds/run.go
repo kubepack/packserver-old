@@ -11,6 +11,7 @@ func NewCmdRun(out, errOut io.Writer, stopCh <-chan struct{}) *cobra.Command {
 	o := server.NewKubepackServerOptions(out, errOut)
 
 	cmd := &cobra.Command{
+		Use:   "run",
 		Short: "Launch a Kubepack API server",
 		Long:  "Launch a Kubepack API server",
 		RunE: func(c *cobra.Command, args []string) error {

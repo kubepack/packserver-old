@@ -22,6 +22,6 @@ Packserver by AppsCode - Kubepack api server
 
 ### SEE ALSO
 
-* [packserver ](packserver_.md)	 - Launch a Kubepack API server
+* [packserver run](packserver_run.md)	 - Launch a Kubepack API server
 * [packserver version](packserver_version.md)	 - Prints binary version number.
 
