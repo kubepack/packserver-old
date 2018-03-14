@@ -31,9 +31,9 @@ type FakePacks struct {
 	ns   string
 }
 
-var packsResource = schema.GroupVersionResource{Group: "tamal.kubepack.com", Version: "v1alpha1", Resource: "packs"}
+var packsResource = schema.GroupVersionResource{Group: "tamal.apps.kubepack.com", Version: "v1alpha1", Resource: "packs"}
 
-var packsKind = schema.GroupVersionKind{Group: "tamal.kubepack.com", Version: "v1alpha1", Kind: "Pack"}
+var packsKind = schema.GroupVersionKind{Group: "tamal.apps.kubepack.com", Version: "v1alpha1", Kind: "Pack"}
 
 // Get takes name of the pack, and returns the corresponding pack object, and an error if there is any.
 func (c *FakePacks) Get(name string, options v1.GetOptions) (result *v1alpha1.Pack, err error) {

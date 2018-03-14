@@ -59,7 +59,7 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 	case v1alpha1.SchemeGroupVersion.WithResource("users"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().V1alpha1().Users().Informer()}, nil
 
-		// Group=tamal.kubepack.com, Version=v1alpha1
+		// Group=tamal.apps.kubepack.com, Version=v1alpha1
 	case tamal_v1alpha1.SchemeGroupVersion.WithResource("packs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Tamal().V1alpha1().Packs().Informer()}, nil
 	case tamal_v1alpha1.SchemeGroupVersion.WithResource("users"):

@@ -28,7 +28,7 @@ type TamalV1alpha1Interface interface {
 	UsersGetter
 }
 
-// TamalV1alpha1Client is used to interact with features provided by the tamal.kubepack.com group.
+// TamalV1alpha1Client is used to interact with features provided by the tamal.apps.kubepack.com group.
 type TamalV1alpha1Client struct {
 	restClient rest.Interface
 }

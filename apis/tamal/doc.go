@@ -17,5 +17,5 @@ limitations under the License.
 // +k8s:deepcopy-gen=package
 
 // Package api is the internal version of the API.
-// +groupName=tamal.kubepack.com
+// +groupName=tamal.apps.kubepack.com
 package tamal

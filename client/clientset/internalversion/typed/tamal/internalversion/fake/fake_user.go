@@ -30,9 +30,9 @@ type FakeUsers struct {
 	Fake *FakeTamal
 }
 
-var usersResource = schema.GroupVersionResource{Group: "tamal.kubepack.com", Version: "", Resource: "users"}
+var usersResource = schema.GroupVersionResource{Group: "tamal.apps.kubepack.com", Version: "", Resource: "users"}
 
-var usersKind = schema.GroupVersionKind{Group: "tamal.kubepack.com", Version: "", Kind: "User"}
+var usersKind = schema.GroupVersionKind{Group: "tamal.apps.kubepack.com", Version: "", Kind: "User"}
 
 // Get takes name of the user, and returns the corresponding user object, and an error if there is any.
 func (c *FakeUsers) Get(name string, options v1.GetOptions) (result *tamal.User, err error) {

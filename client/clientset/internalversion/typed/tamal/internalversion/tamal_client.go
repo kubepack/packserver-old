@@ -26,7 +26,7 @@ type TamalInterface interface {
 	UsersGetter
 }
 
-// TamalClient is used to interact with features provided by the tamal.kubepack.com group.
+// TamalClient is used to interact with features provided by the tamal.apps.kubepack.com group.
 type TamalClient struct {
 	restClient rest.Interface
 }
@@ -68,7 +68,7 @@ func New(c rest.Interface) *TamalClient {
 }
 
 func setConfigDefaults(config *rest.Config) error {
-	g, err := scheme.Registry.Group("tamal.kubepack.com")
+	g, err := scheme.Registry.Group("tamal.apps.kubepack.com")
 	if err != nil {
 		return err
 	}
