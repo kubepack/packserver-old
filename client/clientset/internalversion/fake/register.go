@@ -17,6 +17,7 @@ package fake
 
 import (
 	appsinternalversion "github.com/kubepack/packserver/apis/apps"
+	tamalinternalversion "github.com/kubepack/packserver/apis/tamal"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -48,5 +49,6 @@ func init() {
 // correctly.
 func AddToScheme(scheme *runtime.Scheme) {
 	appsinternalversion.AddToScheme(scheme)
+	tamalinternalversion.AddToScheme(scheme)
 
 }

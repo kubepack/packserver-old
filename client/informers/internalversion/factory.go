@@ -26,6 +26,7 @@ import (
 	internalversion "github.com/kubepack/packserver/client/clientset/internalversion"
 	apps "github.com/kubepack/packserver/client/informers/internalversion/apps"
 	internalinterfaces "github.com/kubepack/packserver/client/informers/internalversion/internalinterfaces"
+	tamal "github.com/kubepack/packserver/client/informers/internalversion/tamal"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -124,8 +125,13 @@ type SharedInformerFactory interface {
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
 	Apps() apps.Interface
+	Tamal() tamal.Interface
 }
 
 func (f *sharedInformerFactory) Apps() apps.Interface {
 	return apps.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Tamal() tamal.Interface {
+	return tamal.New(f, f.namespace, f.tweakListOptions)
 }

@@ -17,7 +17,7 @@ docker run --rm -ti -u $(id -u):$(id -g) \
   github.com/kubepack/packserver/client \
   github.com/kubepack/packserver/apis \
   github.com/kubepack/packserver/apis \
-  apps:v1alpha1 \
+  "apps:v1alpha1 tamal:v1alpha1" \
   --go-header-file "$DOCKER_REPO_ROOT/hack/gengo/boilerplate.go.txt"
 
 popd

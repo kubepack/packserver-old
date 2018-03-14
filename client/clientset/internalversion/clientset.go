@@ -18,6 +18,7 @@ package internalversion
 import (
 	glog "github.com/golang/glog"
 	appsinternalversion "github.com/kubepack/packserver/client/clientset/internalversion/typed/apps/internalversion"
+	tamalinternalversion "github.com/kubepack/packserver/client/clientset/internalversion/typed/tamal/internalversion"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -26,18 +27,25 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	Apps() appsinternalversion.AppsInterface
+	Tamal() tamalinternalversion.TamalInterface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	apps *appsinternalversion.AppsClient
+	apps  *appsinternalversion.AppsClient
+	tamal *tamalinternalversion.TamalClient
 }
 
 // Apps retrieves the AppsClient
 func (c *Clientset) Apps() appsinternalversion.AppsInterface {
 	return c.apps
+}
+
+// Tamal retrieves the TamalClient
+func (c *Clientset) Tamal() tamalinternalversion.TamalInterface {
+	return c.tamal
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -60,6 +68,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.tamal, err = tamalinternalversion.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -74,6 +86,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
 	cs.apps = appsinternalversion.NewForConfigOrDie(c)
+	cs.tamal = tamalinternalversion.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -83,6 +96,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.apps = appsinternalversion.New(c)
+	cs.tamal = tamalinternalversion.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

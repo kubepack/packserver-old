@@ -19,6 +19,8 @@ import (
 	clientset "github.com/kubepack/packserver/client/clientset/versioned"
 	appsv1alpha1 "github.com/kubepack/packserver/client/clientset/versioned/typed/apps/v1alpha1"
 	fakeappsv1alpha1 "github.com/kubepack/packserver/client/clientset/versioned/typed/apps/v1alpha1/fake"
+	tamalv1alpha1 "github.com/kubepack/packserver/client/clientset/versioned/typed/tamal/v1alpha1"
+	faketamalv1alpha1 "github.com/kubepack/packserver/client/clientset/versioned/typed/tamal/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -67,4 +69,14 @@ func (c *Clientset) AppsV1alpha1() appsv1alpha1.AppsV1alpha1Interface {
 // Apps retrieves the AppsV1alpha1Client
 func (c *Clientset) Apps() appsv1alpha1.AppsV1alpha1Interface {
 	return &fakeappsv1alpha1.FakeAppsV1alpha1{Fake: &c.Fake}
+}
+
+// TamalV1alpha1 retrieves the TamalV1alpha1Client
+func (c *Clientset) TamalV1alpha1() tamalv1alpha1.TamalV1alpha1Interface {
+	return &faketamalv1alpha1.FakeTamalV1alpha1{Fake: &c.Fake}
+}
+
+// Tamal retrieves the TamalV1alpha1Client
+func (c *Clientset) Tamal() tamalv1alpha1.TamalV1alpha1Interface {
+	return &faketamalv1alpha1.FakeTamalV1alpha1{Fake: &c.Fake}
 }

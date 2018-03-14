@@ -19,6 +19,8 @@ import (
 	clientset "github.com/kubepack/packserver/client/clientset/internalversion"
 	appsinternalversion "github.com/kubepack/packserver/client/clientset/internalversion/typed/apps/internalversion"
 	fakeappsinternalversion "github.com/kubepack/packserver/client/clientset/internalversion/typed/apps/internalversion/fake"
+	tamalinternalversion "github.com/kubepack/packserver/client/clientset/internalversion/typed/tamal/internalversion"
+	faketamalinternalversion "github.com/kubepack/packserver/client/clientset/internalversion/typed/tamal/internalversion/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -62,4 +64,9 @@ var _ clientset.Interface = &Clientset{}
 // Apps retrieves the AppsClient
 func (c *Clientset) Apps() appsinternalversion.AppsInterface {
 	return &fakeappsinternalversion.FakeApps{Fake: &c.Fake}
+}
+
+// Tamal retrieves the TamalClient
+func (c *Clientset) Tamal() tamalinternalversion.TamalInterface {
+	return &faketamalinternalversion.FakeTamal{Fake: &c.Fake}
 }

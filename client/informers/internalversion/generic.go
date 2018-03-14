@@ -22,6 +22,7 @@ import (
 	"fmt"
 
 	apps "github.com/kubepack/packserver/apis/apps"
+	tamal "github.com/kubepack/packserver/apis/tamal"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -57,6 +58,12 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().InternalVersion().Packs().Informer()}, nil
 	case apps.SchemeGroupVersion.WithResource("users"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Apps().InternalVersion().Users().Informer()}, nil
+
+		// Group=tamal.kubepack.com, Version=internalVersion
+	case tamal.SchemeGroupVersion.WithResource("packs"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Tamal().InternalVersion().Packs().Informer()}, nil
+	case tamal.SchemeGroupVersion.WithResource("users"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Tamal().InternalVersion().Users().Informer()}, nil
 
 	}
 
